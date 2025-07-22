@@ -1,0 +1,447 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .hero-with-video__wrapper {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .hero-with-video__container {
+    max-width: 1150px;
+    margin: 0 auto;
+    background-color: {{ section.settings.container_background }};
+    border-radius: 32px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .hero-with-video__content {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .hero-with-video__heading {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 24px 0;
+    color: {{ section.settings.heading_color }};
+  }
+
+  .hero-with-video__description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 32px 0;
+  }
+
+  .hero-with-video__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 32px;
+    text-decoration: none;
+  }
+
+  .hero-with-video__stars {
+    height: 20px;
+    width: auto;
+  }
+
+  .hero-with-video__rating-text {
+    font-size: 16px;
+    color: #4B4B4B;
+    font-weight: 400;
+  }
+
+  .hero-with-video__subtext {
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .hero-with-video__button {
+    display: inline-block;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    padding: 18px 48px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-with-video__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-with-video__guarantee {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .hero-with-video__guarantee-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hero-with-video__video-container {
+    width: 420px;
+    height: 520px;
+    border-radius: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .hero-with-video__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .hero-with-video__container {
+      max-width: calc(100% - 40px);
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .hero-with-video__container {
+      flex-direction: column-reverse;
+      padding: 30px;
+      gap: 30px;
+    }
+
+    .hero-with-video__content {
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .hero-with-video__heading {
+      font-size: 36px;
+    }
+
+    .hero-with-video__rating {
+      justify-content: flex-start;
+    }
+
+    .hero-with-video__video-container {
+      width: 100%;
+      max-width: 100%;
+      height: 350px;
+    }
+
+    .hero-with-video__guarantee {
+      justify-content: flex-start;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .hero-with-video__container {
+      border-radius: 20px;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .hero-with-video__heading {
+      font-size: 32px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .hero-with-video__description {
+      font-size: 14px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .hero-with-video__rating {
+      margin-bottom: 20px;
+    }
+
+    .hero-with-video__subtext {
+      font-size: 13px;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .hero-with-video__video-container {
+      width: 100%;
+      height: 280px;
+      border-radius: 16px;
+    }
+
+    .hero-with-video__button {
+      width: 100%;
+      padding: 14px 30px;
+      font-size: 15px;
+    }
+
+    .hero-with-video__guarantee {
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .hero-with-video__guarantee-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hero-with-video__wrapper section-{{ section.id }}-padding">
+  <div class="hero-with-video__container">
+    <div class="hero-with-video__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hero-with-video__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="hero-with-video__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_rating -%}
+        <a href="{{ section.settings.rating_link }}" class="hero-with-video__rating">
+          {%- if section.settings.stars_image != blank -%}
+            <img 
+              src="{{ section.settings.stars_image | image_url: width: 100 }}"
+              alt="Rating stars"
+              class="hero-with-video__stars"
+              width="100"
+              height="20"
+              loading="lazy"
+            >
+          {%- endif -%}
+          <span class="hero-with-video__rating-text">{{ section.settings.rating_text }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="hero-with-video__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="hero-with-video__button">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_guarantee -%}
+        <div class="hero-with-video__guarantee">
+          <svg class="hero-with-video__guarantee-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ section.settings.guarantee_text | replace: '30 jours', '<strong>30 jours</strong>' | replace: '30 days', '<strong>30 days</strong>' | replace: '30-day', '<strong>30-day</strong>' }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-with-video__video-container">
+      {%- if section.settings.video_url != blank -%}
+        <video 
+          class="hero-with-video__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          {%- if section.settings.video_poster != blank -%}
+            poster="{{ section.settings.video_poster | image_url: width: 800 }}"
+          {%- endif -%}
+        >
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+        </video>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero with Video",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Eliminate bacteria, viruses and plaque deposits.",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Protect your braces with the 2024 Dental Product of the Year, suitable for retainers, aligners, mouthguards and more.",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": true,
+      "label": "Show rating"
+    },
+    {
+      "type": "image_picker",
+      "id": "stars_image",
+      "label": "Stars image"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "default": "4.9/5",
+      "label": "Rating text"
+    },
+    {
+      "type": "url",
+      "id": "rating_link",
+      "label": "Rating link"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "default": "Backed by British design excellence and recommended by dentists worldwide",
+      "label": "Subtext"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Buy Now",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Guarantee"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantee",
+      "default": true,
+      "label": "Show guarantee"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "default": "30-day money back guarantee",
+      "label": "Guarantee text"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Upload video to Files and paste URL here"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video poster image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#F2F2F2",
+      "label": "Section background"
+    },
+    {
+      "type": "color",
+      "id": "container_background",
+      "default": "#FFFFFF",
+      "label": "Container background"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "default": "#121212",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#656565",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "default": "#6B46FF",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "default": "#FFFFFF",
+      "label": "Button text color"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with Video"
+    }
+  ]
+}
+{% endschema %}

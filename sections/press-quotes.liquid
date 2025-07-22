@@ -1,0 +1,192 @@
+{{ 'press-quotes.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .press-quotes-section {
+    --press-quotes-bg-color: {{ section.settings.background_color }};
+    --press-quotes-text-color: {{ section.settings.text_color }};
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<section class="press-quotes-section">
+  <div class="press-quotes-container">
+    <div class="press-quotes-grid">
+      {% for block in section.blocks %}
+        <div class="press-quote-item" {{ block.shopify_attributes }}>
+          <p class="press-quote-text">"{{ block.settings.quote_text }}"</p>
+          <div class="press-quote-logo">
+            {% if block.settings.brand_logo != blank %}
+              <img src="{{ block.settings.brand_logo | image_url: width: 200 }}" 
+                   alt="{{ block.settings.brand_name }}" 
+                   loading="lazy"
+                   width="{{ block.settings.logo_width | default: 150 }}"
+                   height="auto">
+            {% else %}
+              <span class="brand-name-text">{{ block.settings.brand_name }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="press-quotes-mobile-slider">
+      <div class="swiper press-quotes-swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide press-quote-mobile-item" {{ block.shopify_attributes }}>
+              <p class="press-quote-text">"{{ block.settings.quote_text }}"</p>
+              <div class="press-quote-logo">
+                {% if block.settings.brand_logo != blank %}
+                  <img src="{{ block.settings.brand_logo | image_url: width: 200 }}" 
+                       alt="{{ block.settings.brand_name }}" 
+                       loading="lazy"
+                       width="{{ block.settings.logo_width | default: 150 }}"
+                       height="auto">
+                {% else %}
+                  <span class="brand-name-text">{{ block.settings.brand_name }}</span>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const pressQuotesSwiper = new Swiper('.press-quotes-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Press Quotes",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#2F2F2F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Press Quote",
+      "settings": [
+        {
+          "type": "text",
+          "id": "quote_text",
+          "label": "Quote Text",
+          "default": "Voici comment réussir son Invisalign."
+        },
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name (fallback if no logo)",
+          "default": "GQ"
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "min": 50,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Logo Width",
+          "default": 150
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press Quotes",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote_text": "Voici comment réussir son Invisalign.",
+            "brand_name": "GQ"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote_text": "Ce gadget élimine les bactéries et garde vos appareils dentaires impeccables.",
+            "brand_name": "The Observer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote_text": "Le Dental Pod offre une solution de nettoyage précise et sans effort.",
+            "brand_name": "BDA"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote_text": "Ce petit pod astucieux est un véritable sauveur.",
+            "brand_name": "CNN"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
